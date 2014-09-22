@@ -147,8 +147,10 @@ namespace SupplierQuestionnaire.Controllers
 
             ViewBag.questionString = new SelectList(questionList);
 
-            var reqdResult = from t in db.QuestionAnswerMappers select t;
+            var questionanswermappers = db.QuestionAnswerMappers.Include(q => q.Question).Include(q => q.Supplier);
 
+            var reqdResult = from t in db.QuestionAnswerMappers select t;
+            reqdResult.Include(q => q.Supplier);
 
             if (!String.IsNullOrEmpty(questionString))
             {
@@ -171,7 +173,7 @@ namespace SupplierQuestionnaire.Controllers
                 }
             }
 
-            return View(reqdResult);
+            return View(questionanswermappers);
         }
 
 
