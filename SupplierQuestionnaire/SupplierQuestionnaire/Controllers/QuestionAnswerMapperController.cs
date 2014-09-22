@@ -184,7 +184,7 @@ namespace SupplierQuestionnaire.Controllers
 
             ViewBag.supplierName = new SelectList(supplierList);
 
-            var reqdResult = from t in db.QuestionAnswerMappers select t;
+            var questionanswermappers = db.QuestionAnswerMappers.Include(q => q.Supplier).Include(q => q.Question);
 
 
             if (!String.IsNullOrEmpty(supplierName))
@@ -198,7 +198,7 @@ namespace SupplierQuestionnaire.Controllers
                 }
                 if (suppId != -1)
                 {
-                    var answers = from rec in db.QuestionAnswerMappers where rec.SupplierId == suppId select rec;//w/o sup name
+                    var answers = from rec in questionanswermappers where rec.SupplierId == suppId select rec;//w/o sup name
                     /*var result = (from a in db.QuestionAnswerMappers
                                   join s in db.Suppliers on a.SupplierId equals s.Id
                                   join q in db.Questions on a.QuestionId equals q.Id
@@ -208,7 +208,7 @@ namespace SupplierQuestionnaire.Controllers
                 }
             }
 
-            return View(reqdResult);
+            return View(questionanswermappers);
         }
 
 

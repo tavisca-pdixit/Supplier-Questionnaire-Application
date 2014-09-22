@@ -21,6 +21,10 @@
         </th>
 
         <th>
+            Question 
+        </th>
+
+        <th>
             Answer
         </th>
 
@@ -31,6 +35,10 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.QuestionId)
+        </td>
+
+         <td>
+            @Html.DisplayFor(modelItem => item.Question.QuestionText)
         </td>
         
         <td>
