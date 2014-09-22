@@ -7,7 +7,7 @@
 <h2>Search by Question</h2>
 
 <p>
-    Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create")
     @using (Html.BeginForm()){     
          <p>Question: @Html.DropDownList("questionString", "All") <br />
              <input type="submit" value="Filter" />
@@ -21,6 +21,10 @@
         </th>
 
         <th>
+            Supplier Name
+        </th>
+
+        <th>
             Answer
         </th>
 
@@ -29,6 +33,10 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.Id)
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Supplier.Name)
         </td>
