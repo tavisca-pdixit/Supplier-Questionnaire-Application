@@ -149,9 +149,6 @@ namespace SupplierQuestionnaire.Controllers
 
             var questionanswermappers = db.QuestionAnswerMappers.Include(q => q.Question).Include(q => q.Supplier);
 
-            var reqdResult = from t in db.QuestionAnswerMappers select t;
-            reqdResult.Include(q => q.Supplier);
-
             if (!String.IsNullOrEmpty(questionString))
             {
                 int quesId = -1;
@@ -163,12 +160,12 @@ namespace SupplierQuestionnaire.Controllers
                 }
                 if (quesId != -1)
                 {
-                    var answers = from rec in db.QuestionAnswerMappers where rec.QuestionId == quesId select rec;//w/o sup name
-                    var result = (from a in db.QuestionAnswerMappers
+                    var answers = from rec in questionanswermappers where rec.QuestionId == quesId select rec;//w/o sup name
+                    /*var result = (from a in db.QuestionAnswerMappers
                                  join q in db.Questions on a.QuestionId equals q.Id
                                  join s in db.Suppliers on a.SupplierId equals s.Id
                                  where a.QuestionId == quesId
-                                 select new {name = s.Name,question = q.QuestionText,answer = a.Answer }).ToExpando();//can't show on view
+                                 select new {name = s.Name,question = q.QuestionText,answer = a.Answer }).ToExpando();//can't show on view*/
                     return View(answers);
                 }
             }
@@ -202,11 +199,11 @@ namespace SupplierQuestionnaire.Controllers
                 if (suppId != -1)
                 {
                     var answers = from rec in db.QuestionAnswerMappers where rec.SupplierId == suppId select rec;//w/o sup name
-                    var result = (from a in db.QuestionAnswerMappers
+                    /*var result = (from a in db.QuestionAnswerMappers
                                   join s in db.Suppliers on a.SupplierId equals s.Id
                                   join q in db.Questions on a.QuestionId equals q.Id
                                   where a.SupplierId == suppId
-                                  select new { name = s.Name, question = q.QuestionText, answer = a.Answer }).ToExpando();//can't show on view
+                                  select new { name = s.Name, question = q.QuestionText, answer = a.Answer }).ToExpando();//can't show on view*/
                     return View(answers);
                 }
             }
@@ -222,7 +219,7 @@ namespace SupplierQuestionnaire.Controllers
         }
     }
 
-    public static class Extensions
+    /*public static class Extensions
     {
         public static ExpandoObject ToExpando(this object anonymousObject)
         {
@@ -232,5 +229,5 @@ namespace SupplierQuestionnaire.Controllers
                 expando.Add(item);
             return (ExpandoObject)expando;
         }
-    }
+    }*/
 }
