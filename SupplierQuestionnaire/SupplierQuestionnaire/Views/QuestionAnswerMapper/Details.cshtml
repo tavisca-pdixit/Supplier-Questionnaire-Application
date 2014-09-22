@@ -1,0 +1,37 @@
+﻿@model SupplierQuestionnaire.Models.QuestionAnswerMapper
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>QuestionAnswerMapper</legend>
+
+    <div class="display-label">
+         Supplier Name
+    </div>
+    <div class="display-field">
+        @ViewBag.supplierName
+    </div>
+
+    <div class="display-label">
+         Question
+    </div>
+    <div class="display-field">
+        @ViewBag.questionText
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Answer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Answer)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
