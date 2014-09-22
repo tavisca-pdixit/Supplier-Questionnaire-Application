@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SupplierQuestionnaire.Models.QuestionAnswerMapper>
+
+@{
+    ViewBag.Title = "SearchBySupplier";
+}
+
+<h2>Search by Supplier</h2>
+
+<p>
+   @* @Html.ActionLink("Create New", "Create")*@
+    @using (Html.BeginForm()){     
+         <p>Supplier: @Html.DropDownList("supplierName", "All") <br />
+             <input type="submit" value="Filter" />
+         </p>
+    }
+</p>
+<table>
+    <tr>
+        <th>
+            Question ID 
+        </th>
+
+        <th>
+            Answer
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionId)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Answer)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { quesId = item.QuestionId,suppId = item.SupplierId }) |
+            @Html.ActionLink("Details", "Details", new { quesId = item.QuestionId,suppId = item.SupplierId }) |
+            @Html.ActionLink("Delete", "Delete", new { quesId = item.QuestionId,suppId = item.SupplierId })
+        </td>
+    </tr>
+}
+
+</table>
+
+
